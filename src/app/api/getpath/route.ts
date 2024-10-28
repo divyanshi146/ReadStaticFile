@@ -1,15 +1,15 @@
 // src/app/api/getpath/route.ts
 import { NextResponse } from 'next/server';
 import fs from 'fs';
+import path from 'path';
 
 export async function GET() {
-  const filePath = 'D:/RegistrationOfBSA.txt'; // Use forward slashes or double backslashes
+  const filePath = path.join(process.cwd(), 'public', 'RegistrationOfBSA.txt'); // Adjusted path
 
   try {
     const data = fs.readFileSync(filePath, 'utf8');
     return NextResponse.json({ content: data });
   } catch (err: unknown) {
-    // Check if err is an instance of Error
     if (err instanceof Error) {
       return NextResponse.json({ error: 'Failed to read file', details: err.message }, { status: 500 });
     }
