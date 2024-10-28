@@ -2,17 +2,22 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 
-
 export async function GET() {
   const filePath = 'D:/RegistrationOfBSA.txt'; // Use forward slashes or double backslashes
 
   try {
     const data = fs.readFileSync(filePath, 'utf8');
     return NextResponse.json({ content: data });
-  } catch (error) {
-    return NextResponse.json({ error: 'Failed to read file' }, { status: 500 });
+  } catch (err: unknown) {
+    // Check if err is an instance of Error
+    if (err instanceof Error) {
+      return NextResponse.json({ error: 'Failed to read file', details: err.message }, { status: 500 });
+    }
+    return NextResponse.json({ error: 'Failed to read file', details: 'Unknown error occurred' }, { status: 500 });
   }
 }
+
+
 
 
 
