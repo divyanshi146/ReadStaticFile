@@ -11,6 +11,7 @@ const FileReader: React.FC = () => {
     const fetchFileContent = async () => {
       try {
         const response = await fetch('/api/getpath');
+
         const data = await response.json();
         setContent(data.content);
       } catch (err: unknown) {

@@ -4,7 +4,7 @@ import fs from 'fs';
 import path from 'path';
 
 export async function GET() {
-  const filePath = path.join(process.cwd(), 'public', 'RegistrationOfBSA.txt'); // Adjusted path
+  const filePath = 'D:\\RegistrationOfBSA.txt'; // Adjusted to point to D drive
 
   try {
     const data = fs.readFileSync(filePath, 'utf8');
