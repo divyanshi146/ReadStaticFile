@@ -3,12 +3,12 @@ import { NextResponse } from 'next/server';
 import fs from 'fs';
 
 export async function GET() {
-  const isLocal = process.env.NODE_ENV === 'development'; // Check if running in development
-  const filePath = isLocal ? 'D:\\RegistrationOfBSA.txt' : ''; // Define path only for local
+  const isLocal = process.env.NODE_ENV === 'development';
+  const filePath = isLocal ? 'D:\\RegistrationOfBSA.txt' : ''; // Local path
 
   if (!isLocal) {
-    // If not in development, return an error
-    return NextResponse.json({ error: 'File access is not allowed in production' }, { status: 403 });
+    // Return placeholder content or handle as needed
+    return NextResponse.json({ content: 'This feature is not available in production.' }, { status: 200 });
   }
 
   try {
@@ -19,6 +19,7 @@ export async function GET() {
     return NextResponse.json({ error: 'Failed to read file', details: err instanceof Error ? err.message : 'Unknown error occurred' }, { status: 500 });
   }
 }
+
 
 
 
