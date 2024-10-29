@@ -13,7 +13,8 @@ const FileReader: React.FC = () => {
         const response = await fetch('/api/getpath');
         const data = await response.json();
         setContent(data.content);
-        // console.log("content", data.content); // This should now have the correct content
+        console.log("content", data.content); // This should now have the correct content
+        console.log('Current Environment:', process.env.NODE_ENV);
       } catch (err: unknown) {
         if (err instanceof Error) {
           setError(err.message);
