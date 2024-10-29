@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import fs from 'fs';
 
 export async function GET() {
-  const isLocal = process.env.NODE_ENV === 'development';
+  const isLocal = process.env.NODE_ENV === 'production';
   const filePath = isLocal ? 'D:\\RegistrationOfBSA.txt' : ''; // Local path
 
   if (!isLocal) {
