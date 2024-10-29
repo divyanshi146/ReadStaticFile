@@ -11,18 +11,18 @@ const FileReader: React.FC = () => {
     const fetchFileContent = async () => {
       try {
         const response = await fetch('/api/getpath');
-
         const data = await response.json();
         setContent(data.content);
-        console.log("content", data.content)
+        console.log("content", data.content); // This should now have the correct content
       } catch (err: unknown) {
         if (err instanceof Error) {
-          setError(err.message); // Safely access the error message
+          setError(err.message);
         } else {
           setError('An unknown error occurred');
         }
       }
     };
+    
 
     fetchFileContent();
   }, []);

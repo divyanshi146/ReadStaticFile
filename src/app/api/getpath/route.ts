@@ -1,22 +1,26 @@
 // src/app/api/getpath/route.ts
 import { NextResponse } from 'next/server';
 import fs from 'fs';
-import path from 'path';
 
 export async function GET() {
-  const filePath = 'D:\\RegistrationOfBSA.txt'; // Path to the file on D drive
+  const isLocal = process.env.NODE_ENV === 'development'; // Check if running in development
+  const filePath = isLocal ? 'D:\\RegistrationOfBSA.txt' : ''; // Define path only for local
+
+  if (!isLocal) {
+    // If not in development, return an error
+    return NextResponse.json({ error: 'File access is not allowed in production' }, { status: 403 });
+  }
 
   try {
     const data = fs.readFileSync(filePath, 'utf8');
     return NextResponse.json({ content: data });
   } catch (err: unknown) {
-    console.error('Error reading file:', err); // Log the error
-    if (err instanceof Error) {
-      return NextResponse.json({ error: 'Failed to read file', details: err.message }, { status: 500 });
-    }
-    return NextResponse.json({ error: 'Failed to read file', details: 'Unknown error occurred' }, { status: 500 });
+    console.error('Error reading file:', err);
+    return NextResponse.json({ error: 'Failed to read file', details: err instanceof Error ? err.message : 'Unknown error occurred' }, { status: 500 });
   }
 }
+
+
 
 
 
