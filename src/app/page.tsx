@@ -14,6 +14,7 @@ const FileReader: React.FC = () => {
 
         const data = await response.json();
         setContent(data.content);
+        console.log("content", data.content)
       } catch (err: unknown) {
         if (err instanceof Error) {
           setError(err.message); // Safely access the error message
